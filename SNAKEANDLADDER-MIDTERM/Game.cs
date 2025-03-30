@@ -8,7 +8,6 @@ namespace TICTACTOE_MIDTERM
     internal class Game
     {
 
-
         PrintFormat printFormat = new PrintFormat();
         Display display = new Display();
         Menu menu;
@@ -17,8 +16,6 @@ namespace TICTACTOE_MIDTERM
         {
             menu = new Menu(menuOption, this);
         }
-
-
 
         static Random random = new Random();
         static Dictionary<int, int> snakes = new Dictionary<int, int>()
@@ -98,10 +95,17 @@ namespace TICTACTOE_MIDTERM
 
         public void PlayGame()
         {
-            Console.WriteLine("Welcome to Snake and Ladder!");
-            Console.Write("Enter Player 1 Name: ");
+
+
+            var font = FigletFont.Load("fonts/small.flf.txt");
+            AnsiConsole.Write(
+                new FigletText(font, "WELCOME")
+                .Centered()
+                .Color(Color.Orange3));
+
+            printFormat.print("Enter Player 1 Name: ");
             string player1 = Console.ReadLine();
-            Console.Write("Enter Player 2 Name: ");
+            printFormat.print("Enter Player 2 Name: ");
             string player2 = Console.ReadLine();
 
             int pos1 = 0, pos2 = 0;

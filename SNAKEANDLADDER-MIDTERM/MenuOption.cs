@@ -6,6 +6,7 @@ namespace TICTACTOE_MIDTERM
 {
     internal class MenuOption
     {
+
         private Menu? menu;
         Display display = new Display();
         PrintFormat printFormat = new PrintFormat();
@@ -20,8 +21,15 @@ namespace TICTACTOE_MIDTERM
             this.menu = menu;
         }
 
+        static void ClearConsoleWindows()
+        {
+            Console.Clear();  // Clears visible screen
+            Console.SetBufferSize(Console.WindowWidth, Console.WindowHeight); // Resets buffer size to match window
+        }
+
         public void howToPlay()
         {
+
             AnsiConsole.Write(
             new FigletText("HowToPlay")
             .Centered()
@@ -29,15 +37,38 @@ namespace TICTACTOE_MIDTERM
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();
+            printFormat.printCenterRed("OBJECTIVE");
+            printFormat.printCenter("------------------------------------------");
+            Console.WriteLine();
+            printFormat.printCenterRed("Be the first player to reach tile 100 by rolling the dice and moving forward.");
+            Console.WriteLine();
+            Console.WriteLine();
             printFormat.printCenter("BASIC RULES");
             printFormat.printCenter("------------------------------------------");
             Console.WriteLine();
-            printFormat.printCenterRed("1. The game is played on a grid that's 3 squares by 3 squares.");
-            printFormat.printCenterRed("        2. Players take turns placing their marks (X or O) in an empty square.");
-            printFormat.printCenterRed("         3. The first player to get three of their marks in a row (horizontally,");
-            printFormat.printCenterRed("   vertically, or diagonally) wins the game.");
-            printFormat.printCenterRed("   4. If all 9 squares are filled and no player has three in a row,");
-            printFormat.printCenterRed("   the game is a draw.");
+            printFormat.printCenterRed("1. Players take turns rolling a dice to move forward.          ");
+            printFormat.printCenterRed("2. Landing on a ladder allows you to climb up to a higher tile.");
+            printFormat.printCenterRed("3. Landing on a snake's head makes you slide down to its tail. ");
+            Console.WriteLine();
+            Console.WriteLine();
+            printFormat.printCenterRed("SKILL SYSTEM");
+            printFormat.printCenter("------------------------------------------");
+            printFormat.printCenterRed("1. Skill Tiles: Some tiles contain hidden skills. If a player lands on a         ");
+            printFormat.printCenterRed("   Skill Tile, they receive a random skill.                                      ");
+            printFormat.printCenterRed("2. Max Skills: Each player can hold up to two skills at a time. If they land on a");
+            printFormat.printCenterRed("   Skill Tile while already having two skills, they must replace one.            ");
+            printFormat.printCenterRed("3. No Stacking: Skills do not stack—having two of the same skill is not possible.");Console.WriteLine();
+            Console.WriteLine();
+            printFormat.printCenterRed("AVAILABLE SKILLS");
+            printFormat.printCenter("------------------------------------------");
+            printFormat.printCenterRed("1. Shield – Protects against one negative effect (snake, stun, sabotage, etc.). ");
+            printFormat.printCenterRed("2. Stun – Prevents an opponent from rolling the dice on their next turn.        ");
+            printFormat.printCenterRed("3. Swap (Rare) – Swaps positions with an opponent.                              ");
+            printFormat.printCenterRed("4. Dice Manipulation – Allows the player to pick their dice roll outcome.       ");
+            printFormat.printCenterRed("5. Anchor – If the player lands on a snake’s head, they can ignore it and       ");
+            printFormat.printCenterRed("   stay in place.                                                               ");
+            printFormat.printCenterRed("6. Sabotage – Forces an opponent to roll the dice but move backward instead     ");
+            printFormat.printCenterRed("   of forward.                                                                  ");
 
             Console.WriteLine();
             Console.WriteLine();
@@ -45,14 +76,15 @@ namespace TICTACTOE_MIDTERM
             printFormat.print("BACK TO MENU (PRESS ANY KEY)");
 
             Console.ReadKey();
-            Console.Clear();
+            display.ClearConsole();
             menu.displayMenu();
         }
 
         public void Developers()
         {
+            var font = FigletFont.Load("fonts/nancyj.flf.txt");
             AnsiConsole.Write(
-            new FigletText("DEVS")
+            new FigletText(font,"DEVS")
             .Centered()
             .Color(Color.Green));
 
@@ -84,10 +116,9 @@ namespace TICTACTOE_MIDTERM
             printFormat.printCenterYellow("game mechanics. Always exploring new");
             printFormat.printCenterYellow("technologies and innovative ideas.");
 
-
             printFormat.print("BACK TO MENU (PRESS ANY KEY)");
             Console.ReadKey();
-            Console.Clear();
+            display.ClearConsole();
             menu.displayMenu();
         }
 

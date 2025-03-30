@@ -26,10 +26,12 @@ namespace TICTACTOE_MIDTERM
             int menuChoice;
 
             do {
-                display.paddingTop();
+                Console.Clear();
+
+                var font = FigletFont.Load("fonts/nancyj.flf.txt");
 
                 AnsiConsole.Write(
-                new FigletText("SNAKES AND LADDERS")
+                new FigletText(font,"Snakes & Ladders")
                 .Centered()
                 .Color(Color.Orange3));
 
@@ -40,9 +42,10 @@ namespace TICTACTOE_MIDTERM
                 printFormat.printCenterGreen("3.DEVELOPERS");
                 printFormat.printCenterYellow("4.EXIT");
                 Console.WriteLine();
-                printFormat.print("Enter choice (1-3): ");
+                printFormat.print("Enter choice (1-4): ");
                 string choice = Console.ReadLine();
                 isValid = int.TryParse(choice, out menuChoice) && (menuChoice >= 1 && menuChoice <= 4);
+
 
                 if (!isValid)
                 {
@@ -62,7 +65,7 @@ namespace TICTACTOE_MIDTERM
             switch (menuChoice)
             {
                 case 1:
-                    //GAME
+                    game.PlayGame();
                     break;
                 case 2:
                     menuOption.howToPlay();

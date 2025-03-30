@@ -6,8 +6,6 @@ using TICTACTOE_MIDTERM;
 internal class Program
 {
 
-    
-
     private static void Main(string[] args)
     {
         MenuOption menuOption = new MenuOption();
@@ -17,5 +15,6 @@ internal class Program
         menuOption.SetMenu(menu);
 
         menu.displayMenu();
+
     }
 }

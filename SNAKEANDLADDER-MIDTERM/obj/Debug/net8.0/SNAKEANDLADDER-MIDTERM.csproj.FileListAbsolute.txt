@@ -16,3 +16,7 @@ C:\Users\john paul\source\repos\SNAKEANDLADDER-MIDTERM\SNAKEANDLADDER-MIDTERM\ob
 C:\Users\john paul\source\repos\SNAKEANDLADDER-MIDTERM\SNAKEANDLADDER-MIDTERM\obj\Debug\net8.0\SNAKEANDLADDER-MIDTERM.genruntimeconfig.cache
 C:\Users\john paul\source\repos\SNAKEANDLADDER-MIDTERM\SNAKEANDLADDER-MIDTERM\obj\Debug\net8.0\ref\SNAKEANDLADDER-MIDTERM.dll
 C:\Users\john paul\source\repos\SNAKEANDLADDER-MIDTERM\SNAKEANDLADDER-MIDTERM\obj\Debug\net8.0\SNAKEANDLADDER-MIDTERM.sourcelink.json
+C:\Users\john paul\source\repos\SNAKEANDLADDER-MIDTERM\SNAKEANDLADDER-MIDTERM\bin\Debug\net8.0\fonts\nancyj.flf.txt
+C:\Users\john paul\source\repos\SNAKEANDLADDER-MIDTERM\SNAKEANDLADDER-MIDTERM\bin\Debug\net8.0\fonts\small.flf.txt
+C:\Users\john paul\source\repos\SNAKEANDLADDER-MIDTERM\SNAKEANDLADDER-MIDTERM\bin\Debug\net8.0\fonts\stop.flf.txt
+C:\Users\john paul\source\repos\SNAKEANDLADDER-MIDTERM\SNAKEANDLADDER-MIDTERM\bin\Debug\net8.0\fonts\wavy.flf.txt

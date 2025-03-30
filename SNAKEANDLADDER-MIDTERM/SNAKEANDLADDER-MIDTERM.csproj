@@ -13,7 +13,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="renders\" />
+    <Folder Include="fonts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="fonts\nancyj.flf.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="fonts\small.flf.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="fonts\stop.flf.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="fonts\wavy.flf.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

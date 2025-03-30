@@ -2,139 +2,155 @@
 using System;
 using System.Data;
 using SNAKEANDLADDER_MIDTERM.styling;
+using System.Numerics;
+using SNAKEANDLADDER_MIDTERM;
+using static SNAKEANDLADDER_MIDTERM.GameLogic;
 
 namespace TICTACTOE_MIDTERM
 {
     internal class Game
     {
 
+        GameLogic logic = new GameLogic();
         PrintFormat printFormat = new PrintFormat();
         Display display = new Display();
         Menu menu;
+
 
         public Game(MenuOption menuOption)
         {
             menu = new Menu(menuOption, this);
         }
 
-        static Random random = new Random();
-        static Dictionary<int, int> snakes = new Dictionary<int, int>()
-    {
-        { 16, 6 }, { 47, 26 }, { 49, 11 }, { 56, 53 }, { 62, 19 }, { 64, 60 }, { 87, 24 }, { 93, 73 }, { 95, 75 }, { 98, 78 }
-    };
+        private static List<Player> players = new();
 
-        static Dictionary<int, int> ladders = new Dictionary<int, int>()
-    {
-        { 1, 38 }, { 4, 14 }, { 9, 31 }, { 21, 42 }, { 28, 84 }, { 36, 44 }, { 51, 67 }, { 71, 91 }, { 80, 100 }
-    };
-
-        static int MovePlayer(int position, int roll, string player)
+        public void StartGame()
         {
-            int newPosition = position + roll;
-            if (newPosition > 100)
-            {
-                Console.WriteLine($"{player} stays at {position} (Roll exceeds 100)");
-                return position;
-            }
+            Console.Clear();
 
-            if (snakes.ContainsKey(newPosition))
-            {
-                Console.WriteLine($"🐍 {player} got bitten by a snake! Moves down to {snakes[newPosition]}");
-                return snakes[newPosition];
-            }
-            if (ladders.ContainsKey(newPosition))
-            {
-                Console.WriteLine($"🪜 {player} climbed a ladder! Moves up to {ladders[newPosition]}");
-                return ladders[newPosition];
-            }
+            players.Clear();
 
-            Console.WriteLine($"{player} moves to {newPosition}");
-            return newPosition;
-        }
+            int numberOfPlayers;
+            bool isValid;
+            bool gameEnded = false;
+            bool playAgain = false;
+            int currentPlayerIndex = 0;
 
-        static void DisplayBoard(int pos1, int pos2)
-        {
-            var table = new Table();
-            table.Border = TableBorder.Heavy;
-            table.ShowRowSeparators();
-            table.HideHeaders();
-            for (int col = 0; col < 10; col++)
-            {
-                table.AddColumn(new TableColumn((col + 1).ToString()).Centered());
-            }
+            var font = FigletFont.Load("fonts/wavy.flf.txt");
 
-            for (int row = 8; row >= 0; row--)
-            {
-                var rowCells = new List<string>();
-
-                for (int col = 0; col < 10; col++)
-                {
-                    int cellNumber = (row % 2 == 0) ? (row * 10 + col + 1) : (row * 10 + (9 - col) + 1);
-                    string cellContent = cellNumber.ToString("D2");
-
-                    if (snakes.ContainsKey(cellNumber))
-                        cellContent = $"[red]🐍{cellNumber}[/]";
-                    else if (ladders.ContainsKey(cellNumber))
-                        cellContent = $"[green]🪜{cellNumber}[/]";
-
-                    if (pos1 == cellNumber && pos2 == cellNumber)
-                        cellContent = $"[bold blue]P1+P2[/]";
-                    else if (pos1 == cellNumber)
-                        cellContent = $"[bold yellow]P1[/]";
-                    else if (pos2 == cellNumber)
-                        cellContent = $"[bold cyan]P2[/]";
-
-                    rowCells.Add(cellContent);
-                }
-                table.AddRow(rowCells.ToArray());
-            }
-
-            AnsiConsole.Clear();
-            AnsiConsole.Write(table);
-        }
-
-        public void PlayGame()
-        {
-
-
-            var font = FigletFont.Load("fonts/small.flf.txt");
             AnsiConsole.Write(
-                new FigletText(font, "WELCOME")
-                .Centered()
-                .Color(Color.Orange3));
+            new FigletText(font, "SNAKES & LADDERS")
+            .Centered()
+            .Color(Color.Orange3));
 
-            printFormat.print("Enter Player 1 Name: ");
-            string player1 = Console.ReadLine();
-            printFormat.print("Enter Player 2 Name: ");
-            string player2 = Console.ReadLine();
-
-            int pos1 = 0, pos2 = 0;
-            bool turn = true;
-
-            while (pos1 < 100 && pos2 < 100)
-            {
-                DisplayBoard(pos1, pos2);
-
-                Console.WriteLine($"\n{(turn ? player1 : player2)}'s turn. Press Enter to roll the dice...");
-                Console.ReadKey();
-                int roll = random.Next(1, 7);
-                Console.WriteLine($"{(turn ? player1 : player2)} rolled a {roll}!");
-
-                if (turn)
-                    pos1 = MovePlayer(pos1, roll, player1);
-                else
-                    pos2 = MovePlayer(pos2, roll, player2);
-
-                if (pos1 == 100 || pos2 == 100)
+            do
+            {   
+                again:
+                printFormat.print("Enter the number of players(2-4): ");
+                string tonum = Console.ReadLine();
+                isValid = int.TryParse(tonum, out numberOfPlayers) && (numberOfPlayers >= 2 && numberOfPlayers <= 4);
+                if (!isValid)
                 {
-                    Console.WriteLine($"\n🎉 {(pos1 == 100 ? player1 : player2)} wins! 🎉");
-                    break;
+                    printFormat.printCenterRed("Invalid Input.");
+                    printFormat.printCenterRed("Press any key to try again");
+                    Console.ReadKey();
+                    Console.Clear();
+                    goto again;
                 }
+            }
+            while (!isValid);
 
-                turn = !turn;
+            var availableCharacters = new List<string>
+            {
+                "Sung Jinwoo", "Beru", "Iron", "Saitama"
+            };
+
+            string[] colors = { "red", "green", "blue", "yellow" };
+
+            for (int i = 1; i <= numberOfPlayers; i++)
+            {
+                printFormat.printCenterRed($"For Player {i}");
+                Console.WriteLine();
+                
+                var character = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("[red]CHOOSE CHARACTER TO PLAY (use ⬆️ ⬇️ arrow)[/]")
+                    .PageSize(10)
+                    .AddChoices(availableCharacters)
+                 );
+                
+                printFormat.printCenterRed($"Player {i} chose {character}");
+                Console.WriteLine();
+                players.Add(new Player(character, colors[i-1]));
+                availableCharacters.Remove(character);
+                if (i == numberOfPlayers)
+                {
+                    AnsiConsole.MarkupLine("[red]Press any key to continue...[/]");
+                    Console.ReadKey();
+                }
             }
 
-            Console.WriteLine("Game Over. Thanks for playing!");
+            Again:
+            while (!gameEnded)
+            {
+                
+                Player currentPlayer = players[currentPlayerIndex];
+
+                if (currentPlayer.HasWon)
+                {
+                    currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
+                    continue;
+                }
+
+                logic.DisplayBoard(players, currentPlayerIndex);
+
+                if (currentPlayer.SkipTurn)
+                {
+                    logic.lastAction = $"[red]{currentPlayer.Name} is stunned ⚡ and skips this turn![/]";
+                    currentPlayer.SkipTurn = false;
+                    logic.DisplayBoard(players, currentPlayerIndex);
+                    Console.ReadKey();
+                }
+                else
+                {
+                    
+                    logic.DisplayBoard(players, currentPlayerIndex);
+
+                    if (currentPlayer.Skills.Count > 0 && AnsiConsole.Confirm($"[{currentPlayer.Color}]{currentPlayer.Name}[/], do you want to use a skill?"))
+                    {
+                        logic.UseSkill(currentPlayer, players);
+                        logic.DisplayBoard(players, currentPlayerIndex);
+                    }
+
+                    int roll = logic.RollDice(players, currentPlayerIndex);
+                    logic.lastRoll = roll;
+
+                    logic.MovePlayer(currentPlayer, roll);
+                    logic.CheckSkillTile(currentPlayer);
+
+                    if (currentPlayer.Position >= 100)
+                    {
+                        currentPlayer.HasWon = true;
+                        logic.DisplayBoard(players, currentPlayerIndex);
+                        AnsiConsole.MarkupLine($"\n[bold green]🎉 Congratulations {currentPlayer.Name}! You win the game! 🏆[/]");
+
+                        if (players.Count(p => !p.HasWon) == 0 || AnsiConsole.Confirm("\nDo you want to continue playing?"))
+                        {
+                            Console.Clear();
+                            goto Again;
+                        }
+                        else
+                        {
+                            gameEnded = true;
+                            menu.displayMenu();
+                        }
+                    }
+                }
+
+                currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
+                /*Console.ReadKey();*/
+            }
         }
+
     }
 }

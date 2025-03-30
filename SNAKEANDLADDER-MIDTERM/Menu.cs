@@ -16,7 +16,6 @@ namespace TICTACTOE_MIDTERM
             this.game = game;
         }
 
-        
         public void displayMenu()
         {
 
@@ -26,6 +25,7 @@ namespace TICTACTOE_MIDTERM
             bool isValid;
             int menuChoice;
 
+            again:
             do {
                 Console.Clear();
 
@@ -57,16 +57,13 @@ namespace TICTACTOE_MIDTERM
                     Console.ReadKey();
                     Console.Clear();
                 }
-                Console.Clear();
             }
             while (!isValid);
-
-            Console.Clear();
 
             switch (menuChoice)
             {
                 case 1:
-                    game.PlayGame();
+                    game.StartGame();
                     break;
                 case 2:
                     menuOption.howToPlay();
@@ -75,9 +72,27 @@ namespace TICTACTOE_MIDTERM
                     menuOption.Developers();
                     break;
                 case 4:
-                    Environment.Exit(0);
-                    break;
+                    Console.WriteLine();
+                    var character = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("[red]ARE YOU SURE YOU WANT TO EXIT THE GAME??[/]")
+                        .PageSize(10)
+                        .AddChoices("YES", "NO")
+                     );
+
+                    if (character == "YES")
+                    {
+                        Environment.Exit(0);
+                    }
+                    else if (character == "NO")
+                    {
+                        goto again;
+                    }
+                     break;
+                
             }
+
+            Console.Clear();
 
         }
     }

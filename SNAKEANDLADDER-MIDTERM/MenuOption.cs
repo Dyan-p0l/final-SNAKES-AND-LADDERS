@@ -30,12 +30,12 @@ namespace TICTACTOE_MIDTERM
         public void howToPlay()
         {
 
+            var font = FigletFont.Load("fonts/nancyj.flf.txt");
             AnsiConsole.Write(
-            new FigletText("HowToPlay")
+            new FigletText(font, "HowToPlay")
             .Centered()
-            .Color(Color.Red3));
-            Console.WriteLine();
-            Console.WriteLine();
+            .Color(Color.Orange1));
+
             Console.WriteLine();
             printFormat.printCenterRed("OBJECTIVE");
             printFormat.printCenter("------------------------------------------");
@@ -51,24 +51,24 @@ namespace TICTACTOE_MIDTERM
             printFormat.printCenterRed("3. Landing on a snake's head makes you slide down to its tail. ");
             Console.WriteLine();
             Console.WriteLine();
-            printFormat.printCenterRed("SKILL SYSTEM");
+            printFormat.printCenterGreen("SKILL SYSTEM");
             printFormat.printCenter("------------------------------------------");
-            printFormat.printCenterRed("1. Skill Tiles: Some tiles contain hidden skills. If a player lands on a         ");
-            printFormat.printCenterRed("   Skill Tile, they receive a random skill.                                      ");
-            printFormat.printCenterRed("2. Max Skills: Each player can hold up to two skills at a time. If they land on a");
-            printFormat.printCenterRed("   Skill Tile while already having two skills, they must replace one.            ");
-            printFormat.printCenterRed("3. No Stacking: Skills do not stack—having two of the same skill is not possible.");Console.WriteLine();
+            printFormat.printCenterGreen("1. Skill Tiles: Some tiles contain hidden skills. If a player lands on a         ");
+            printFormat.printCenterGreen("   Skill Tile, they receive a random skill.                                      ");
+            printFormat.printCenterGreen("2. Max Skills: Each player can hold up to two skills at a time. If they land on a");
+            printFormat.printCenterGreen("   Skill Tile while already having two skills, they must replace one.            ");
+            printFormat.printCenterGreen("3. No Stacking: Skills do not stack—having two of the same skill is not possible.");Console.WriteLine();
             Console.WriteLine();
-            printFormat.printCenterRed("AVAILABLE SKILLS");
+            printFormat.printCenterPurple("AVAILABLE SKILLS");
             printFormat.printCenter("------------------------------------------");
-            printFormat.printCenterRed("1. Shield – Protects against one negative effect (snake, stun, sabotage, etc.). ");
-            printFormat.printCenterRed("2. Stun – Prevents an opponent from rolling the dice on their next turn.        ");
-            printFormat.printCenterRed("3. Swap (Rare) – Swaps positions with an opponent.                              ");
-            printFormat.printCenterRed("4. Dice Manipulation – Allows the player to pick their dice roll outcome.       ");
-            printFormat.printCenterRed("5. Anchor – If the player lands on a snake’s head, they can ignore it and       ");
-            printFormat.printCenterRed("   stay in place.                                                               ");
-            printFormat.printCenterRed("6. Sabotage – Forces an opponent to roll the dice but move backward instead     ");
-            printFormat.printCenterRed("   of forward.                                                                  ");
+            printFormat.printCenterPurple("1. Shield – Protects against one negative effect (snake, stun, sabotage, etc.). ");
+            printFormat.printCenterPurple("2. Stun – Prevents an opponent from rolling the dice on their next turn.        ");
+            printFormat.printCenterPurple("3. Swap (Rare) – Swaps positions with an opponent.                              ");
+            printFormat.printCenterPurple("4. Dice Manipulation – Allows the player to pick their dice roll outcome.       ");
+            printFormat.printCenterPurple("5. Anchor – If the player lands on a snake’s head, they can ignore it and       ");
+            printFormat.printCenterPurple("   stay in place.                                                               ");
+            printFormat.printCenterPurple("6. Sabotage – Forces an opponent to roll the dice but move backward instead     ");
+            printFormat.printCenterPurple("   of forward.                                                                  ");
 
             Console.WriteLine();
             Console.WriteLine();

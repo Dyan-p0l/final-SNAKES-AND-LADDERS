@@ -33,6 +33,13 @@ namespace SNAKEANDLADDER_MIDTERM.styling
             display.centerSpace(gradient.GetGradientText(text));
         }
 
+        public void printCenterPurple(string text)
+        {
+            Display display = new Display();
+            Gradient gradient = new Gradient(Color.MediumPurple, Color.Blue);
+            display.centerSpace(gradient.GetGradientText(text));
+        }
+
         public void print(string text)
         {
             Gradient gradient = new Gradient(Color.Yellow, Color.Orange3);

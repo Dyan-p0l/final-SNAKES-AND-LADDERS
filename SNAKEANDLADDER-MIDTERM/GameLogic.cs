@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TICTACTOE_MIDTERM.audio;
 
 namespace SNAKEANDLADDER_MIDTERM
 {
@@ -14,7 +15,7 @@ namespace SNAKEANDLADDER_MIDTERM
         {
             { 16, 6 }, { 47, 26 }, { 49, 11 }, { 56, 53 }, { 62, 19 }, { 64, 60 }, { 87, 24 }, { 93, 73 }, { 95, 75 }, { 98, 78 }
         };
-
+        Soundfx soundfx = new Soundfx();    
         public readonly Dictionary<int, int> ladders = new()
         {
             { 1, 38 }, { 4, 14 }, { 9, 31 }, { 21, 42 }, { 28, 84 }, { 36, 44 }, { 51, 67 }, { 71, 91 }, { 80, 100 }
@@ -169,23 +170,27 @@ namespace SNAKEANDLADDER_MIDTERM
             {
                 if (player.Skills.Contains("Anchor ⚓"))
                 {
+                    soundfx.anchorSound();
                     player.Skills.Remove("Anchor ⚓");
                     lastAction = $"[bold green]{player.Name} used Anchor to resist the snake![/]";
                 }
                 else if (player.Skills.Contains("Shield 🛡️"))
                 {
+                    soundfx.shieldSound();
                     player.IsShielded = false;
                     player.Skills.Remove("Shield 🛡️");
                     lastAction = $"[bold green]{player.Name} blocked snake with Shield![/]";
                 }
                 else
                 {
+                    soundfx.snakeBiteSound();
                     player.Position = snakes[newPosition];
                     lastAction = $"[red]🐍 {player.Name} got bitten! Moves down to {snakes[newPosition]}[/]";
                 }
             }
             else if (ladders.ContainsKey(newPosition))
             {
+                soundfx.climbLadderSound();
                 player.Position = ladders[newPosition];
                 lastAction = $"[green]🪜 {player.Name} climbed a ladder! Moves up to {ladders[newPosition]}[/]";
             }
@@ -243,6 +248,7 @@ namespace SNAKEANDLADDER_MIDTERM
             }
             else if (skill == "Shield 🛡️")
             {
+                soundfx.shieldSound();
                 player.IsShielded = true;
                 lastAction = $"[green]{player.Name} is shielded with 🛡️![/]";
             }
@@ -254,11 +260,14 @@ namespace SNAKEANDLADDER_MIDTERM
 {
                 if (targetPlayer.IsShielded)
                 {
+                    soundfx.shieldSound();
                     targetPlayer.IsShielded = false;
                     lastAction += $"\n[green]{targetPlayer.Name} blocked the stun with 🛡️ Shield![/]";
                 }
                 else
                 {
+                    soundfx.stunSound();
+                    Console.ReadKey();
                     targetPlayer.SkipTurn = true;
                     lastAction += $"\n[red]{targetPlayer.Name} is stunned ⚡ and will skip next turn![/]";
                 }
@@ -272,6 +281,7 @@ namespace SNAKEANDLADDER_MIDTERM
                 }
                 else
                 {
+                    soundfx.swapSound();
                     (player.Position, targetPlayer.Position) = (targetPlayer.Position, player.Position);
                     lastAction += $"\n[yellow]{player.Name} swapped positions 🔄 with {targetPlayer.Name}![/]";
                 }
@@ -285,6 +295,7 @@ namespace SNAKEANDLADDER_MIDTERM
                 }
                 else
                 {
+                    soundfx.sabotageSound();
                     int sabotageRoll = random.Next(1, 7);
                     targetPlayer.Position = Math.Max(0, targetPlayer.Position - sabotageRoll);
                     lastAction += $"\n[red]{targetPlayer.Name} was sabotaged 💣 and moved back {sabotageRoll} spaces! ⬇️[/]";
@@ -307,7 +318,7 @@ namespace SNAKEANDLADDER_MIDTERM
                 {
                     newSkill = availableSkills[random.Next(availableSkills.Length)];
                 } while (player.Skills.Contains(newSkill));
-
+                soundfx.PlayObtainSkill();
                 player.Skills.Add(newSkill);
                 lastAction = $"[blue]{player.Name} acquired {newSkill}![/]";
                 lastSkillUsed = $"[{player.Color}]{player.Name}[/] got [bold]{newSkill}[/]";

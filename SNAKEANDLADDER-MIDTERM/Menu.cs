@@ -1,13 +1,15 @@
 ﻿using System;
 using SNAKEANDLADDER_MIDTERM.styling;
 using Spectre.Console;
+using TICTACTOE_MIDTERM.audio;
 
-namespace TICTACTOE_MIDTERM
+
+namespace SNAKEANDLADDER_MIDTERM
 {
 
     internal class Menu
     {
-
+        Soundfx soundfx = new Soundfx();
         private MenuOption menuOption;
         private Game game;
         public Menu(MenuOption menuOption, Game game)
@@ -47,9 +49,9 @@ namespace TICTACTOE_MIDTERM
                 string choice = Console.ReadLine();
                 isValid = int.TryParse(choice, out menuChoice) && (menuChoice >= 1 && menuChoice <= 4);
 
-
                 if (!isValid)
                 {
+                    soundfx.PlayErrorSound();
                     printFormat.printCenterRed("Invalid Input. Please try again");
                     Console.WriteLine();
                     Console.WriteLine();
@@ -63,13 +65,20 @@ namespace TICTACTOE_MIDTERM
             switch (menuChoice)
             {
                 case 1:
+                    soundfx.PlayMenuSound();
                     game.StartGame();
                     break;
                 case 2:
+                    display.ClearConsole();
+                    soundfx.PlayMenuSound();
                     menuOption.howToPlay();
                     break;
                 case 3:
+                    
+                    display.ClearConsole();
+                    soundfx.PlayMenuSound();
                     menuOption.Developers();
+
                     break;
                 case 4:
                     Console.WriteLine();
@@ -92,7 +101,7 @@ namespace TICTACTOE_MIDTERM
                 
             }
 
-            Console.Clear();
+            display.ClearConsole();
 
         }
     }

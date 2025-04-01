@@ -3,19 +3,18 @@ using System;
 using System.Data;
 using SNAKEANDLADDER_MIDTERM.styling;
 using System.Numerics;
-using SNAKEANDLADDER_MIDTERM;
 using static SNAKEANDLADDER_MIDTERM.GameLogic;
+using TICTACTOE_MIDTERM.audio;
 
-namespace TICTACTOE_MIDTERM
+namespace SNAKEANDLADDER_MIDTERM
 {
     internal class Game
     {
-
         GameLogic logic = new GameLogic();
         PrintFormat printFormat = new PrintFormat();
         Display display = new Display();
         Menu menu;
-
+        Soundfx soundfx = new Soundfx();
 
         public Game(MenuOption menuOption)
         {
@@ -51,6 +50,7 @@ namespace TICTACTOE_MIDTERM
                 isValid = int.TryParse(tonum, out numberOfPlayers) && (numberOfPlayers >= 2 && numberOfPlayers <= 4);
                 if (!isValid)
                 {
+                    soundfx.PlayErrorSound();
                     printFormat.printCenterRed("Invalid Input.");
                     printFormat.printCenterRed("Press any key to try again");
                     Console.ReadKey();
@@ -132,6 +132,7 @@ namespace TICTACTOE_MIDTERM
                     {
                         currentPlayer.HasWon = true;
                         logic.DisplayBoard(players, currentPlayerIndex);
+                        soundfx.PlayWinSound();
                         AnsiConsole.MarkupLine($"\n[bold green]🎉 Congratulations {currentPlayer.Name}! You win the game! 🏆[/]");
 
                         if (players.Count(p => !p.HasWon) == 0 || AnsiConsole.Confirm("\nDo you want to continue playing?"))
@@ -141,7 +142,7 @@ namespace TICTACTOE_MIDTERM
                         }
                         else
                         {
-                            gameEnded = true;
+                            gameEnded = true;   
                             menu.displayMenu();
                         }
                     }

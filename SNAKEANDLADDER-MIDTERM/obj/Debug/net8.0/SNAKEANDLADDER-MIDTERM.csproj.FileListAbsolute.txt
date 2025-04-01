@@ -20,3 +20,13 @@ C:\Users\john paul\source\repos\SNAKEANDLADDER-MIDTERM\SNAKEANDLADDER-MIDTERM\bi
 C:\Users\john paul\source\repos\SNAKEANDLADDER-MIDTERM\SNAKEANDLADDER-MIDTERM\bin\Debug\net8.0\fonts\small.flf.txt
 C:\Users\john paul\source\repos\SNAKEANDLADDER-MIDTERM\SNAKEANDLADDER-MIDTERM\bin\Debug\net8.0\fonts\stop.flf.txt
 C:\Users\john paul\source\repos\SNAKEANDLADDER-MIDTERM\SNAKEANDLADDER-MIDTERM\bin\Debug\net8.0\fonts\wavy.flf.txt
+C:\Users\john paul\source\repos\SNAKEANDLADDER-MIDTERM\SNAKEANDLADDER-MIDTERM\bin\Debug\net8.0\NAudio.dll
+C:\Users\john paul\source\repos\SNAKEANDLADDER-MIDTERM\SNAKEANDLADDER-MIDTERM\bin\Debug\net8.0\NAudio.Asio.dll
+C:\Users\john paul\source\repos\SNAKEANDLADDER-MIDTERM\SNAKEANDLADDER-MIDTERM\bin\Debug\net8.0\NAudio.Core.dll
+C:\Users\john paul\source\repos\SNAKEANDLADDER-MIDTERM\SNAKEANDLADDER-MIDTERM\bin\Debug\net8.0\NAudio.Midi.dll
+C:\Users\john paul\source\repos\SNAKEANDLADDER-MIDTERM\SNAKEANDLADDER-MIDTERM\bin\Debug\net8.0\NAudio.Wasapi.dll
+C:\Users\john paul\source\repos\SNAKEANDLADDER-MIDTERM\SNAKEANDLADDER-MIDTERM\bin\Debug\net8.0\NAudio.WinMM.dll
+C:\Users\john paul\source\repos\SNAKEANDLADDER-MIDTERM\SNAKEANDLADDER-MIDTERM\bin\Debug\net8.0\audio\sounds\snake.mp3
+C:\Users\john paul\source\repos\SNAKEANDLADDER-MIDTERM\SNAKEANDLADDER-MIDTERM\bin\Debug\net8.0\audio\sounds\stun.wav
+C:\Users\john paul\source\repos\SNAKEANDLADDER-MIDTERM\SNAKEANDLADDER-MIDTERM\bin\Debug\net8.0\audio\sounds\win.wav
+C:\Users\john paul\source\repos\SNAKEANDLADDER-MIDTERM\SNAKEANDLADDER-MIDTERM\bin\Debug\net8.0\audio\sounds\winning.wav

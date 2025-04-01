@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NAudio" Version="2.2.1" />
     <PackageReference Include="Spectre.Console" Version="0.49.1" />
   </ItemGroup>
 
@@ -17,6 +18,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="audio\sounds\snake.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="audio\sounds\stun.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="audio\sounds\win.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="audio\sounds\winning.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="fonts\nancyj.flf.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

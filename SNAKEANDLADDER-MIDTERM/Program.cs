@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Spectre.Console;
-using TICTACTOE_MIDTERM;
+using SNAKEANDLADDER_MIDTERM;
 
 internal class Program
 {

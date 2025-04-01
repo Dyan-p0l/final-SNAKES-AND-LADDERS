@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SNAKEANDLADDER-MIDTERM")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3f036190c3963af8194870ac0662a42811330133")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+84d4f51bf9c3aeb7d9bca2f339cfead718454651")]
 [assembly: System.Reflection.AssemblyProductAttribute("SNAKEANDLADDER-MIDTERM")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SNAKEANDLADDER-MIDTERM")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

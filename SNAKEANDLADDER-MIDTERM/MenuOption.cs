@@ -2,7 +2,7 @@
 using System;
 using SNAKEANDLADDER_MIDTERM.styling;
 
-namespace TICTACTOE_MIDTERM
+namespace SNAKEANDLADDER_MIDTERM
 {
     internal class MenuOption
     {
@@ -61,13 +61,13 @@ namespace TICTACTOE_MIDTERM
             Console.WriteLine();
             printFormat.printCenterPurple("AVAILABLE SKILLS");
             printFormat.printCenter("------------------------------------------");
-            printFormat.printCenterPurple("1. Shield – Protects against one negative effect (snake, stun, sabotage, etc.). ");
-            printFormat.printCenterPurple("2. Stun – Prevents an opponent from rolling the dice on their next turn.        ");
-            printFormat.printCenterPurple("3. Swap (Rare) – Swaps positions with an opponent.                              ");
-            printFormat.printCenterPurple("4. Dice Manipulation – Allows the player to pick their dice roll outcome.       ");
-            printFormat.printCenterPurple("5. Anchor – If the player lands on a snake’s head, they can ignore it and       ");
+            printFormat.printCenterPurple("1. 🛡️Shield – Protects against one negative effect (snake, stun, sabotage, etc.). ");
+            printFormat.printCenterPurple("2. ⚡Stun – Prevents an opponent from rolling the dice on their next turn.        ");
+            printFormat.printCenterPurple("3. 🔄Swap (Rare) – Swaps positions with an opponent.                              ");
+            printFormat.printCenterPurple("4. 🎲Dice Manipulation – Allows the player to pick their dice roll outcome.       ");
+            printFormat.printCenterPurple("5. ⚓Anchor – If the player lands on a snake’s head, they can ignore it and       ");
             printFormat.printCenterPurple("   stay in place.                                                               ");
-            printFormat.printCenterPurple("6. Sabotage – Forces an opponent to roll the dice but move backward instead     ");
+            printFormat.printCenterPurple("6. 💣Sabotage – Forces an opponent to roll the dice but move backward instead     ");
             printFormat.printCenterPurple("   of forward.                                                                  ");
 
             Console.WriteLine();

@@ -10,7 +10,7 @@ namespace SNAKEANDLADDER_MIDTERM.styling
         public void ClearConsole()
         {
 
-            [DllImport("kernel32.dll", SetLastError = true)]
+            /*[DllImport("kernel32.dll", SetLastError = true)]
             static extern IntPtr GetStdHandle(int nStdHandle);
 
             [DllImport("kernel32.dll", SetLastError = true)]
@@ -29,7 +29,7 @@ namespace SNAKEANDLADDER_MIDTERM.styling
                 {
                     SetConsoleMode(handle, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
                 }
-            }
+            }*/
 
             Console.Write("\u001b[2J\u001b[3J\u001b[H");
 

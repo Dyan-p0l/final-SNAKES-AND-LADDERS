@@ -29,7 +29,10 @@ namespace SNAKEANDLADDER_MIDTERM
 
             again:
             do {
+                
                 Console.Clear();
+                Console.WriteLine();
+                Console.WriteLine();
 
                 var font = FigletFont.Load("fonts/nancyj.flf.txt");
 

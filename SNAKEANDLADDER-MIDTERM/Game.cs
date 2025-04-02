@@ -65,7 +65,7 @@ namespace SNAKEANDLADDER_MIDTERM
                 "Sung Jinwoo", "Beru", "Iron", "Saitama"
             };
 
-            string[] colors = { "red", "green", "blue", "yellow" };
+            string[] colors = { "red", "orange1", "blue", "yellow" };
 
             for (int i = 1; i <= numberOfPlayers; i++)
             {
@@ -135,21 +135,31 @@ namespace SNAKEANDLADDER_MIDTERM
                         soundfx.PlayWinSound();
                         AnsiConsole.MarkupLine($"\n[bold green]🎉 Congratulations {currentPlayer.Name}! You win the game! 🏆[/]");
 
-                        if (players.Count(p => !p.HasWon) == 0 || AnsiConsole.Confirm("\nDo you want to continue playing?"))
+                        if (players.Count(p => !p.HasWon) >= 1)
                         {
-                            Console.Clear();
-                            goto Again;
+                            if (AnsiConsole.Confirm("\nDo you want to continue playing?"))
+                            {
+                                Console.Clear();
+                                goto Again;
+                            }
+                            else
+                            {
+                                gameEnded = true;
+                                menu.displayMenu();
+                            }
+                            
                         }
                         else
                         {
-                            gameEnded = true;   
+                            printFormat.printCenterRed("Press any key to go back to main menu");
+                            Console.ReadKey();
+                            gameEnded = true;
                             menu.displayMenu();
                         }
                     }
                 }
 
                 currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
-                /*Console.ReadKey();*/
             }
         }
 

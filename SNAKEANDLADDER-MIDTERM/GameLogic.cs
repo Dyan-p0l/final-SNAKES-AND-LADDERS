@@ -39,6 +39,8 @@ namespace SNAKEANDLADDER_MIDTERM
             public bool HasWon { get; set; } = false;
             public bool IsShielded { get; set; } = false;
 
+            public bool isAnchored { get; set; } = false;
+
             public Player(string name, string color)
             {
                 Name = name;
@@ -112,7 +114,8 @@ namespace SNAKEANDLADDER_MIDTERM
             {
                 string status = player.HasWon ? "[green]WINNER![/]" :
                               player.SkipTurn ? "[red]STUNNED[/]" : 
-                              player.IsShielded ? "[cyan]SHIELDED[/]": "[yellow]ACTIVE[/]";
+                              player.IsShielded ? "[cyan]SHIELDED[/]":  
+                              player.isAnchored ? "[orange1]ANCHORED[/]": "[yellow]ACTIVE[/]";
                 statusTable.AddRow(
                     $"[{player.Color}]{player.Name}[/]",
                     $"[bold]{player.Position}[/]",
@@ -139,7 +142,7 @@ namespace SNAKEANDLADDER_MIDTERM
 
         public int RollDice(List<Player> players, int currentPlayerIndex)
         {
-            AnsiConsole.MarkupLine("[yellow]Press any key to roll the dice...[/]");
+            AnsiConsole.MarkupLine($"[{players[currentPlayerIndex].Color}]{players[currentPlayerIndex].Name}[/][yellow] Press any key to roll the dice...[/]");
             Console.ReadKey();
             AnsiConsole.Status()
                 .Start("ROLLING THE DICE...", ctx =>
@@ -168,10 +171,11 @@ namespace SNAKEANDLADDER_MIDTERM
 
             if (snakes.ContainsKey(newPosition))
             {
-                if (player.Skills.Contains("Anchor ⚓"))
+                if (player.isAnchored)
                 {
                     soundfx.anchorSound();
                     player.Skills.Remove("Anchor ⚓");
+                    player.isAnchored = false;
                     lastAction = $"[bold green]{player.Name} used Anchor to resist the snake![/]";
                 }
                 else if (player.Skills.Contains("Shield 🛡️"))
@@ -194,6 +198,7 @@ namespace SNAKEANDLADDER_MIDTERM
                 player.Position = ladders[newPosition];
                 lastAction = $"[green]🪜 {player.Name} climbed a ladder! Moves up to {ladders[newPosition]}[/]";
             }
+
         }
 
         public void UseSkill(Player player, List<Player> players)
@@ -245,12 +250,19 @@ namespace SNAKEANDLADDER_MIDTERM
                 int chosenRoll = int.Parse(rollChoice);
                 lastAction = $"[bold white on red]{player.Name} chose to roll a {chosenRoll}![/]";
                 MovePlayer(player, chosenRoll);
+                CheckSkillTile(player);
             }
             else if (skill == "Shield 🛡️")
             {
                 soundfx.shieldSound();
                 player.IsShielded = true;
                 lastAction = $"[green]{player.Name} is shielded with 🛡️![/]";
+            }
+            else if (skill == "Anchor ⚓")
+            {
+                soundfx.anchorSound();
+                player.isAnchored = true;
+                lastAction = $"[green]{player.Name} is anchored with ⚓![/]";
             }
         }
 
@@ -262,14 +274,14 @@ namespace SNAKEANDLADDER_MIDTERM
                 {
                     soundfx.shieldSound();
                     targetPlayer.IsShielded = false;
-                    lastAction += $"\n[green]{targetPlayer.Name} blocked the stun with 🛡️ Shield![/]";
+                    lastAction += $"\n[{targetPlayer.Color}]{targetPlayer.Name}[/] [green]blocked the stun with 🛡️ Shield![/]";
                 }
                 else
                 {
                     soundfx.stunSound();
                     Console.ReadKey();
                     targetPlayer.SkipTurn = true;
-                    lastAction += $"\n[red]{targetPlayer.Name} is stunned ⚡ and will skip next turn![/]";
+                    lastAction += $"\n[red]{targetPlayer.Name}[/] [green]is stunned ⚡ and will skip next turn![/]";
                 }
              }
             else if (skill == "Swap 🔄")
@@ -277,13 +289,13 @@ namespace SNAKEANDLADDER_MIDTERM
                 if (targetPlayer.IsShielded)
                 {
                     targetPlayer.IsShielded = false;
-                    lastAction += $"\n[green]{targetPlayer.Name} blocked the swap with 🛡️ Shield![/]";
+                    lastAction += $"\n[{targetPlayer.Color}]{targetPlayer.Name}[/] [green]blocked the swap with 🛡️ Shield![/]";
                 }
                 else
                 {
                     soundfx.swapSound();
                     (player.Position, targetPlayer.Position) = (targetPlayer.Position, player.Position);
-                    lastAction += $"\n[yellow]{player.Name} swapped positions 🔄 with {targetPlayer.Name}![/]";
+                    lastAction += $"\n[{targetPlayer.Color}]{player.Name}[/] [green]swapped positions 🔄 with {targetPlayer.Name}![/]";
                 }
             }
             else if (skill == "Sabotage 💣")
@@ -291,14 +303,14 @@ namespace SNAKEANDLADDER_MIDTERM
                 if (targetPlayer.IsShielded)
                 {
                     targetPlayer.IsShielded = false;
-                    lastAction += $"\n[green]{targetPlayer.Name} blocked the sabotage with 🛡️ Shield![/]";
+                    lastAction += $"\n[{targetPlayer.Color}]{targetPlayer.Name}[/] [green]blocked the sabotage with 🛡️ Shield![/]";
                 }
                 else
                 {
                     soundfx.sabotageSound();
                     int sabotageRoll = random.Next(1, 7);
                     targetPlayer.Position = Math.Max(0, targetPlayer.Position - sabotageRoll);
-                    lastAction += $"\n[red]{targetPlayer.Name} was sabotaged 💣 and moved back {sabotageRoll} spaces! ⬇️[/]";
+                    lastAction += $"\n[{targetPlayer.Color}]{targetPlayer.Name}[/] [green]was sabotaged 💣 and moved back {sabotageRoll} spaces! ⬇️[/]";
                 }
             }
         }
